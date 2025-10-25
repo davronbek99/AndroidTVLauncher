@@ -56,4 +56,9 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
-}
+
+    // TV Material & Foundation
+    implementation(libs.androidx.tv.foundation)
+    implementation(libs.androidx.tv.material)
+
+   }
