@@ -19,7 +19,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun AppListScreen(pm: PackageManager) {
+fun AppListScreen(
+    pm: PackageManager,
+    onAppOpened: (String) -> Unit = {}
+) {
     val apps = remember { loadApps(pm) }
     val context = LocalContext.current
 
@@ -44,7 +47,11 @@ fun AppListScreen(pm: PackageManager) {
                 AppItem(app = app) {
                     val intent = pm.getLaunchIntentForPackage(app.packageName)
                     intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    if (intent != null) context.startActivity(intent)
+                    if (intent != null) {
+                        // Ilovani ochishdan oldin callback ni chaqirish
+                        onAppOpened(app.packageName)
+                        context.startActivity(intent)
+                    }
                 }
             }
         }
